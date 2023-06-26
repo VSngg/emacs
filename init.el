@@ -1,4 +1,4 @@
-(defvar ian/indent-width 4) ; change this value to your preferred width
+(defvar vs/indent-width 4) ; change this value to your preferred width
 (setq frame-title-format '("Yay-Evil") ; Yayyyyy Evil!
       ring-bell-function 'ignore       ; minimize distraction
       frame-resize-pixelwise t
@@ -16,7 +16,7 @@
 (global-visual-line-mode t)
 ;; Always use spaces for indentation
 (setq-default indent-tabs-mode nil
-            tab-width ian/indent-width)
+            tab-width vs/indent-width)
 
 ;; Omit default startup screen
 (setq inhibit-startup-screen t)
@@ -59,7 +59,7 @@
 (use-package cc-vars
   :ensure nil
   :config
-  (setq-default c-basic-offset ian/indent-width)
+  (setq-default c-basic-offset vs/indent-width)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode . "awk")
                           (other . "k&r"))))
@@ -67,7 +67,7 @@
 ;; Python (both v2 and v3)
 (use-package python
   :ensure nil
-  :config (setq python-indent-offset ian/indent-width))
+  :config (setq python-indent-offset vs/indent-width))
 
 (use-package mwheel
   :ensure nil
@@ -80,7 +80,7 @@
   :config (show-paren-mode +1))
 
 ;; Set fonts
-(defun ian/set-default-font ()
+(defun vs/set-default-font ()
   (interactive)
   (set-face-attribute 'default nil :family "Iosevka Nerd Font Mono")
   (set-face-attribute 'default nil
@@ -95,7 +95,7 @@
                       :weight 'medium))
 (setq initial-frame-alist '((fullscreen . maximized)))
 (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font Mono-16"))
-(ian/set-default-font)
+(vs/set-default-font)
 
 (use-package ediff
   :ensure nil
@@ -147,7 +147,7 @@
   :init
   (setq evil-want-C-u-scroll t
         evil-want-keybinding nil
-        evil-shift-width ian/indent-width)
+        evil-shift-width vs/indent-width)
   :hook (after-init . evil-mode)
   :config
   (with-eval-after-load 'evil-maps ; avoid conflict with company tooltip selection
@@ -232,13 +232,13 @@
       "gp" 'previous-buffer)
 
     ;; set up 'SPC' as the global leader key
-    (general-create-definer dt/leader-keys
+    (general-create-definer vs/leader-keys
         :states '(normal insert visual emacs)
         :keymaps 'override
         :prefix "SPC" ;; set leader
         :global-prefix "M-SPC") ;; access leader in insert mode
 
-    (dt/leader-keys
+    (vs/leader-keys
         "b"  '(:ignore t                  :wk "buffer")
         "bb" '(switch-to-buffer           :wk "Switch buffer")
         "bk" '(kill-this-buffer           :wk "Kill this buffer")
