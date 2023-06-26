@@ -239,28 +239,29 @@
         :global-prefix "M-SPC") ;; access leader in insert mode
 
     (dt/leader-keys
-        "b"  '(:ignore t        :wk "buffer")
-        "bb" '(switch-to-buffer :wk "Switch buffer")
-        "bk" '(kill-this-buffer :wk "Kill this buffer")
-        "bn" '(next-buffer      :wk "Next buffer")
-        "bp" '(previous-buffer  :wk "Previous buffer")
-        "br" '(revert-buffer    :wk "Reload buffer")
+        "b"  '(:ignore t                  :wk "buffer")
+        "bb" '(switch-to-buffer           :wk "Switch buffer")
+        "bk" '(kill-this-buffer           :wk "Kill this buffer")
+        "bn" '(next-buffer                :wk "Next buffer")
+        "bp" '(previous-buffer            :wk "Previous buffer")
+        "br" '(revert-buffer              :wk "Reload buffer")
+        "bs" '(switch-to-scratch-and-back :wk "Switch to scratch buffer")
 
-        "e"  '(:ignore t              :wk "open")
-        "ee" '(dired                  :wk "Open dired")
-        "es" '(dired-other-window     :wk "Open dired in split")
-        "ec" '(er-find-user-init-file :wk "Open init.el")
-        "eb" '(eval-buffer            :wk "Eval buffer")
-        "er" '(eval-region            :wk "Eval region")
+        "e"  '(:ignore t                :wk "open")
+        "ee" '(dired                    :wk "Open dired")
+        "es" '(dired-other-window       :wk "Open dired in split")
+        "ec" '(find-file user-init-file :wk "Open init.el")
+        "eb" '(eval-buffer              :wk "Eval buffer")
+        "er" '(eval-region              :wk "Eval region")
 
         "a"  '(align-regexp :wk "Align by regexp")
-        "f"  '(find-file :wk "Find file")
-        "c"  '(compile :wk "Compile")
+        "f"  '(find-file    :wk "Find file")
+        "c"  '(compile      :wk "Compile")
 
-        "h"   '(:ignore t :wk "Help")
+        "h"   '(:ignore t         :wk "Help")
         "h f" '(describe-function :wk "Describe function")
         "h v" '(describe-variable :wk "Describe variable")
-        "h r" '(reload-init-file :wk "Reload emacs config")
+        "h r" '(reload-init-file  :wk "Reload emacs config")
 
         "u"  '(:ignore t       :wk "capitalize")
         "uu" '(upcase-word     :wk "Uppercase word")
@@ -298,3 +299,12 @@
   (interactive)
   (load-file user-init-file)
   (load-file user-init-file))
+;; Switch to scratch buffer and back
+(defun switch-to-scratch-and-back ()
+    "Toggle between *scratch* buffer and the current buffer.
+     If the *scratch* buffer does not exist, create it."
+    (interactive)
+    (let ((scratch-buffer-name (get-buffer-create "*scratch*")))
+        (if (equal (current-buffer) scratch-buffer-name)
+            (switch-to-buffer (other-buffer))
+            (switch-to-buffer scratch-buffer-name (lisp-interaction-mode)))))
