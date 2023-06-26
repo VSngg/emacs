@@ -250,7 +250,10 @@
         "e"  '(:ignore t                :wk "open")
         "ee" '(dired                    :wk "Open dired")
         "es" '(dired-other-window       :wk "Open dired in split")
-        "ec" '(find-file user-init-file :wk "Open init.el")
+        "ec" '((lambda()
+                 (interactive)
+                 (find-file user-init-file))
+               :wk "Open init.el")
         "eb" '(eval-buffer              :wk "Eval buffer")
         "er" '(eval-region              :wk "Eval region")
 
