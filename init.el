@@ -290,6 +290,12 @@
                 which-key-allow-imprecise-window-fit t
                 which-key-separator " → " ))
 (use-package good-scroll :config (good-scroll-mode 1))
+(use-package go-mode
+  :init
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save))
+
+(use-package eglot)
 
 (when (eq system-type 'windows-nt)
   (setq scroll-margin 0)
