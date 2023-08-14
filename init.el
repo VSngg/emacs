@@ -299,9 +299,7 @@
 
 (when (eq system-type 'windows-nt)
   (setq scroll-margin 0)
-  (setq explicit-shell-file-name "c:/Users/user/bin/w64devkit/bin/sh.exe")
-  (setq shell-file-name explicit-shell-file-name)
-  (add-to-list 'exec-path "C:/Users/user/bin/w64devkit/bin"))
+  )
 
 ;; Reload configuration
 (defun reload-init-file ()
